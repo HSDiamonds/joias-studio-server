@@ -20,13 +20,12 @@ app.post('/remove-bg', upload.single('image'), async (req, res) => {
       filename: 'image.jpg',
       contentType: req.file.mimetype
     });
-    form.append('size', 'auto');
+    form.append('background_color', 'ffffff');
 
-    const response = await fetch('https://background-removal-ai.p.rapidapi.com/remove-background', {
+    const response = await fetch('https://sdk.photoroom.com/v1/segment', {
       method: 'POST',
       headers: {
-        'x-rapidapi-host': 'background-removal-ai.p.rapidapi.com',
-        'x-rapidapi-key': '066563ff90mshfb600f9a67a203bp1d1177jsnee39d8700fa9',
+        'x-api-key': 'sk_pr_default_db76558215b16b55a97dc0854ac7f283b94ace78',
         ...form.getHeaders()
       },
       body: form
