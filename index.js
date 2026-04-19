@@ -25,7 +25,7 @@ app.post('/remove-bg', upload.single('image'), async (req, res) => {
     const response = await fetch('https://sdk.photoroom.com/v1/segment', {
       method: 'POST',
       headers: {
-        'x-api-key': 'sk_pr_default_db76558215b16b55a97dc0854ac7f283b94ace78',
+        'x-api-key': 'sandbox_sk_pr_default_db76558215b16b55a97dc0854ac7f283b94ace78',
         ...form.getHeaders()
       },
       body: form
