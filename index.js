@@ -31,17 +31,17 @@ app.post('/remove-bg', upload.single('image'), async (req, res) => {
       body: form
     });
 
-    const errText = await response.text();
     console.log('STATUS:', response.status);
-    console.log('RESPOSTA:', errText);
 
     if (!response.ok) {
+      const errText = await response.text();
+      console.log('ERRO:', errText);
       return res.status(500).json({ error: errText });
     }
 
-    const buf = Buffer.from(errText, 'binary');
+    const buffer = await response.buffer();
     res.set('Content-Type', 'image/png');
-    res.send(buf);
+    res.send(buffer);
 
   } catch(e) {
     console.log('CATCH:', e.message);
