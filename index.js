@@ -25,17 +25,14 @@ app.post('/remove-bg', upload.single('image'), async (req, res) => {
     const response = await fetch('https://sdk.photoroom.com/v1/segment', {
       method: 'POST',
       headers: {
-        'x-api-key': 'sandbox_sk_pr_default_db76558215b16b55a97dc0854ac7f283b94ace78',
+        'x-api-key': 'sk_pr_default_db76558215b16b55a97dc0854ac7f283b94ace78',
         ...form.getHeaders()
       },
       body: form
     });
 
-    console.log('STATUS:', response.status);
-
     if (!response.ok) {
       const errText = await response.text();
-      console.log('ERRO:', errText);
       return res.status(500).json({ error: errText });
     }
 
@@ -44,7 +41,6 @@ app.post('/remove-bg', upload.single('image'), async (req, res) => {
     res.send(buffer);
 
   } catch(e) {
-    console.log('CATCH:', e.message);
     res.status(500).json({ error: e.message });
   }
 });
