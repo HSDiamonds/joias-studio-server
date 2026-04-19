@@ -31,19 +31,23 @@ app.post('/remove-bg', upload.single('image'), async (req, res) => {
       body: form
     });
 
+    const errText = await response.text();
+    console.log('STATUS:', response.status);
+    console.log('RESPOSTA:', errText);
+
     if (!response.ok) {
-      const err = await response.text();
-      return res.status(500).json({ error: err });
+      return res.status(500).json({ error: errText });
     }
 
-    const buffer = await response.buffer();
+    const buf = Buffer.from(errText, 'binary');
     res.set('Content-Type', 'image/png');
-    res.send(buffer);
+    res.send(buf);
 
   } catch(e) {
+    console.log('CATCH:', e.message);
     res.status(500).json({ error: e.message });
   }
 });
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 10000;
 app.listen(PORT, () => console.log(`Server rodando na porta ${PORT}`));
